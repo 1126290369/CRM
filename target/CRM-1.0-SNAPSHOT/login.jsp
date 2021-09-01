@@ -47,13 +47,22 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 				type:"post",
 				datatype:"json",
 				success:function (data) {
+					// window.alert("data")
 
+					 // window.alert(data)
+
+					eval("var data1="+data)
+                    // window.alert(data)
+                    // window.alert(data1)
+                    // window.alert(data1.success)
 					//后端返回一个  success：true/false确定是否登入成功
 					//             msg：登入失败的原因
-					if (data.success){
-						window.location.href = ""
+					if (data1.success){
+                        window.location.href = "workbench/index.jsp"
+                        // window.alert("aaa")
 					}else {
-						$("#msg").html(data.msg)
+
+						$("#msg").html(data1.msg)
 					}
 				}
 
@@ -79,7 +88,7 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 			<div class="page-header">
 				<h1>登录</h1>
 			</div>
-			<form action="workbench/index.html" class="form-horizontal" role="form">
+			<form action="workbench/index.jsp" class="form-horizontal" role="form">
 				<div class="form-group form-group-lg">
 					<div style="width: 350px;">
 						<input class="form-control" type="text" placeholder="用户名" id="login_name">

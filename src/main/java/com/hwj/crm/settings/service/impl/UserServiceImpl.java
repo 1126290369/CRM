@@ -8,11 +8,18 @@ import com.hwj.crm.utils.DateTimeUtil;
 import com.hwj.crm.utils.SqlSessionUtil;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class UserServiceImpl implements UserService {
     private UserDao userDao = SqlSessionUtil.getSqlSession().getMapper(UserDao.class);
 
+    @Override
+    public List<User> getUserList() {
+        List<User> userList = userDao.getUserList();
+        System.out.println("===============3");
+        return userList;
+    }
     @Override
     public User login(String login_user, String login_psw, String ip) throws LoginException {
 

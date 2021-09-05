@@ -11,6 +11,7 @@
   <typeAliases>
 
   	<package name="com.hwj.crm.settings.domain"/>
+    <package name="com.hwj.crm.workbench.domain"/>
 
 
   </typeAliases>
@@ -32,6 +33,7 @@
   <mappers>
 
       <package name="com.hwj.crm.settings.dao"/>
+      <package name="com.hwj.crm.workbench.dao"/>
     
   </mappers>
 </configuration>

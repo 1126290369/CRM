@@ -13,6 +13,9 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 <script type="text/javascript" src="jquery/bootstrap_3.3.0/js/bootstrap.min.js"></script>
 	<script>
 		$(function () {
+			if(window.top!=window){
+				window.top.location=window.location;
+			}
 			$("#login_name").val="";
 			$("#login_psw").val="";
 			$("#login_name").focus();

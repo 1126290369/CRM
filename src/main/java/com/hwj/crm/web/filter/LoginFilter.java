@@ -1,7 +1,6 @@
-package com.hwj.crm.web_filter;
+package com.hwj.crm.web.filter;
 
 import com.hwj.crm.settings.domain.User;
-
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;

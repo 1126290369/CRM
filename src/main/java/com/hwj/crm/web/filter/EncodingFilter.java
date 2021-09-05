@@ -1,4 +1,4 @@
-package com.hwj.crm.web_filter;
+package com.hwj.crm.web.filter;
 
 import javax.servlet.*;
 import java.io.IOException;

@@ -4,29 +4,75 @@
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.hwj.crm.workbench.dao.ActivityDao">
-<insert id="saveActivity" parameterType="Activity">
-    insert into tbl_Activity(
-    id,
-    owner,
-    name,
-    startDate,
-    endDate,
-    cost,
-    description,
-    createTime,
-    createBy
-    ) values(
-    #{id},
-    #{owner},
-    #{name},
-    #{startDate},
-    #{endDate},
-    #{cost},
-    #{description},
-    #{createTime},
-    #{createBy}
-    )
-</insert>
+    <insert id="saveActivity" parameterType="Activity">
+        insert into tbl_Activity(
+        id,
+        owner,
+        name,
+        startDate,
+        endDate,
+        cost,
+        description,
+        createTime,
+        createBy
+        ) values(
+        #{id},
+        #{owner},
+        #{name},
+        #{startDate},
+        #{endDate},
+        #{cost},
+        #{description},
+        #{createTime},
+        #{createBy}
+        )
+    </insert>
+    <select id="searchCount" resultType="int">
+        select count(*)
+        from tbl_user u
+        join tbl_activity a
+        on u.id=a.owner
+        <where>
+            <if test="#{name}!=null and #{name}!=''">
+                #{name} like "%" #{name} "%"
+            </if>
+            <if test="#{owner}!=null and #{owner}!=''">
+                and #{owner} like "%" #{owner} "%"
+            </if>
+            <if test="#{startDate}!=null and #{startDate}!=''">
+                and #{startDate} like "%" #{startDate} "%"
+            </if>
+            <if test="#{endDate}!=null and #{endDate}!=''">
+                and #{endDate} like "%" #{endDate} "%"
+            </if>
+
+        </where>
+    </select>
+    <select id="activityList" resultType="Activity">
+        select
+        a.name,
+        u.name,
+        a.startDate,
+        a.endDate
+        from tbl_user u
+        join tbl_activity a
+        on u.id=a.owner
+        <where>
+            <if test="#{name}!=null and #{name}!=''">
+                #{name} like "%" #{name} "%"
+            </if>
+            <if test="#{owner}!=null and #{owner}!=''">
+                and #{owner} like "%" #{owner} "%"
+            </if>
+            <if test="#{startDate}!=null and #{startDate}!=''">
+                and #{startDate} like "%" #{startDate} "%"
+            </if>
+            <if test="#{endDate}!=null and #{endDate}!=''">
+                and #{endDate} like "%" #{endDate} "%"
+            </if>
+            
+        </where>
+    </select>
 	
 </mapper>
 

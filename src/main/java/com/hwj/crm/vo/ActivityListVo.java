@@ -3,15 +3,15 @@ package com.hwj.crm.vo;
 import java.util.List;
 
 public class ActivityListVo<t> {
-    private List<t> Ac;
+    private List<t> activityList;
     private Integer total;
 
-    public List<t> getAc() {
-        return Ac;
+    public List<t> getActivityList() {
+        return activityList;
     }
 
-    public void setAc(List<t> ac) {
-        Ac = ac;
+    public void setActivityList(List<t> activityList) {
+        this.activityList = activityList;
     }
 
     public Integer getTotal() {

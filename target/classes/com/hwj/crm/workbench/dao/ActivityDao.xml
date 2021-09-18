@@ -33,45 +33,107 @@
         join tbl_activity a
         on u.id=a.owner
         <where>
-            <if test="#{name}!=null and #{name}!=''">
-                #{name} like "%" #{name} "%"
+            <if test="name!=null and name!=''">
+                a.name like '%' #{name} '%'
             </if>
-            <if test="#{owner}!=null and #{owner}!=''">
-                and #{owner} like "%" #{owner} "%"
+            <if test="owner!=null and owner!=''">
+                and u.name like '%' #{owner} '%'
             </if>
-            <if test="#{startDate}!=null and #{startDate}!=''">
-                and #{startDate} like "%" #{startDate} "%"
+            <if test="startDate!=null and startDate!=''">
+                and a.startDate like '%' #{startDate} '%'
             </if>
-            <if test="#{endDate}!=null and #{endDate}!=''">
-                and #{endDate} like "%" #{endDate} "%"
+            <if test="endDate!=null and endDate!=''">
+                and a.endDate like '%' #{endDate} '%'
             </if>
 
         </where>
     </select>
     <select id="activityList" resultType="Activity">
         select
-        a.name,
-        u.name,
-        a.startDate,
-        a.endDate
+        a.id id,
+        a.name name,
+        u.name owner,
+        a.startDate startDate,
+        a.endDate endDate
         from tbl_user u
         join tbl_activity a
         on u.id=a.owner
         <where>
-            <if test="#{name}!=null and #{name}!=''">
-                #{name} like "%" #{name} "%"
+            <if test="name!=null and name!=''">
+                a.name like '%' #{name} '%'
             </if>
-            <if test="#{owner}!=null and #{owner}!=''">
-                and #{owner} like "%" #{owner} "%"
+            <if test="owner!=null and owner!=''">
+                and u.name like '%' #{owner} '%'
             </if>
-            <if test="#{startDate}!=null and #{startDate}!=''">
-                and #{startDate} like "%" #{startDate} "%"
+            <if test="startDate!=null and startDate!=''">
+                and a.startDate &gt; #{startDate}
             </if>
-            <if test="#{endDate}!=null and #{endDate}!=''">
-                and #{endDate} like "%" #{endDate} "%"
+            <if test="endDate!=null and endDate!=''">
+                and a.endDate &lt; #{endDate}
             </if>
-            
+
         </where>
+        order by a.createTime desc
+        limit #{pageCount},#{pageSize}
+    </select>
+    <delete id="deleteById">
+        delete from tbl_activity
+        where id in
+        <foreach collection="array" item="id" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+    </delete>
+    <select id="selectById" parameterType="String" resultType="Activity">
+        select
+        name,
+        owner,
+        startDate,
+        endDate,
+        cost,
+        description
+        from
+        tbl_activity
+        where
+        id=#{id}
+
+
+    </select>
+    <update id="update" parameterType="Activity">
+        update
+        tbl_activity
+        set owner=#{owner},
+        name=#{name},
+        startDate=#{startDate},
+        endDate=#{endDate},
+        cost=#{cost},
+        description=#{description},
+        editTime=#{editTime},
+        editBy=#{editBy}
+        where
+        id=#{id}
+
+    </update>
+    <select id="detail" resultType="Activity">
+        select
+        a.id,
+        a.name,
+        u.name owner,
+        a.startDate,
+        a.endDate,
+        a.createBy,
+        a.createTime,
+        a.editBy,
+        a.editTime,
+        a.cost,
+        a.description
+        from
+        tbl_activity a
+        join
+        tbl_user u
+        on
+        a.owner=u.id
+        where
+        a.id=#{id}
     </select>
 	
 </mapper>

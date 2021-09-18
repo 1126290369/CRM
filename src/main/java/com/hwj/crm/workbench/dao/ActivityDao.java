@@ -14,4 +14,12 @@ public interface ActivityDao {
     int searchCount(Map<String, Object> map);
 
     List<Activity> activityList(Map<String, Object> map);
+
+    int deleteById(String[] ids);
+
+    Activity selectById(String id);
+
+    int update(Activity activity);
+
+    Activity detail(String id);
 }
